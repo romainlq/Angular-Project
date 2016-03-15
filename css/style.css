@@ -1,0 +1,25 @@
+html, body {
+    height: 100%;
+    margin:0;
+    padding:0;
+}
+
+#map {
+    height: 100%;
+}
+#index-banner{
+  position: relative;
+}
+
+.t_accueil{
+  color: #ff9800;
+}
+
+#download-button{
+  position: relative;
+  z-index: 0;
+}
+
+#formulaire{
+  color: orange;
+}
