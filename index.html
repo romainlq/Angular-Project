@@ -51,9 +51,9 @@
         <h2 class="header">Fais ton choix de ville tralala</h2>
         <br><br>
         <div class="row-container">
-          <form id="formulaire" ng-controller="formController as formCtrl" ng-submit="formCtrl.pushOptions(options)">
+          <form id="formulaire" name="searchForm" ng-controller="formController as formCtrl" ng-submit="formCtrl.pushOptions(options)">
             <div class="input-field col s12">
-              <select id="choixVille">
+              <select id="choixVille" required>
                 <option value="" disabled selected>Choisis ta ville</option>
                 <option value="Amsterdam">Amsterdam</option>
                 <option value="Barcelona">Barcelone</option>
@@ -68,7 +68,7 @@
             </div>
             <br><br><br>
             <div class="input-field col s12">
-              <select id="choixCategorie">
+              <select id="choixCategorie" required>
                 <option value="" disabled selected>Dodo ? Pécho ? Graille ? </option>
                 <option value="accomodation">Hébergement</option>
                 <option value="attraction">Où sortir</option>
@@ -77,6 +77,7 @@
               </select>
               <label>Qu'est-ce que tu cherches ?</label>
             </div>
+            <div>searchForm is {{searchForm.$valid}}</div>
             <div class="row container center col s6 offset-s3">
                 <button id="go"class="btn waves-effect waves-light orange" type="submit" name="action">C'est parti !
                 <i class="material-icons right">thumb_up</i>
@@ -119,6 +120,6 @@
     <!--Import scroll file-->
     <script type="text/javascript" src="js/scroll.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>    
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
