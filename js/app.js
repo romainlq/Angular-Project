@@ -17,14 +17,14 @@
     $scope.loading=false; // Charge les données ou non
 
     recherche="null"; //choix hébergement, activité, poi, etc ...
-   
+
   }]);
 
   //Controller formulaire
   app.controller('formController', ['$scope', function($scope){
     $scope.pushOptions = function(option){
-      this.option.ville = document.getElementById('choixVille');
-      this.option.ville = document.getElementById('choixCategorie');
+      $scope.option.ville = $scope.choixVille;
+      $scope.option.ville = $scope.choixCategorie;
     };
   }]);
 
@@ -47,6 +47,6 @@
       $scope.map = new google.maps.Map(document.getElementById("map"),mapOptions);
       }
 
-    
+
   }]);
 })();
