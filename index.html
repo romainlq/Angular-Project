@@ -90,17 +90,22 @@
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background1.jpg"></div>
     </div>
-    <div id="carte" class="section white">
-      <div class="row container">
+    
+    <!-- SECTION MAP -->
+    <div id="carte" class="section white container" ng-controller="mapsController">
+      <div class="row ">
           <h2 class="header center">Map</h2>
            <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel</p>
-
-          <!-- Affichage map sur 50% de la section -->
-          <div class="row col s6">
-              <div id="map"></div>
-          </div>
-
+           <div class="center">
+               <a class="waves-effect waves-light btn orange" ><i class="material-icons right">navigation</i>Afficher la map</a> 
+           </div>          
       </div>
+       <!-- Affichage map sur 50% de la section -->
+       <div class="row">
+         <div class="col s6" id="map">
+         </div>  
+       </div>
+              
     </div>
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background2.jpg"></div>
@@ -113,7 +118,10 @@
     </div>
 
     <!--Import jQuery before materialize.js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIW1SxZ7GCQDf_bEvOsXDLNqgZkwB3tpU"
+    async defer></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    
     <script type="text/javascript" src="js/materialize.js"></script>
     <!--Import parallax initialisation-->
     <script type="text/javascript" src="js/parallax.js"></script>
@@ -121,5 +129,6 @@
     <script type="text/javascript" src="js/scroll.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    
   </body>
 </html>
