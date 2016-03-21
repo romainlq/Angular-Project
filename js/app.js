@@ -2,33 +2,26 @@
   // Création module angular
   var app = angular.module('interest', []);
 
-  // Variables à récuperer
-  //var ville = document.getElementById('ville');
+  // CONTROLLERS
 
-  // Controllers
-  // Controller général
+  // MAIN CONTROLLER
   app.controller('mainController',['$scope','$http', function($scope,$http){
-    /*
-    $scope.ville=null;
-    //  $scope.option;
-    $scope.option=null;
-    this.options=option;
-    */
-    $scope.loading=false; // Charge les données ou non
+    //Variable qui récupère le json des infos demandées par le user
+    $scope.items=null
 
-    recherche="null"; //choix hébergement, activité, poi, etc ...
+    //Fonction qui récupère les infos par categorie et ville choisies
+    $scope.getInfos = function(){
+      $http.get("http://tour-pedia.org/api/getPlaces?location="+$scope.choixVille+"&category="+$scope.choixCategorie)
+      .success(function(data){
+        $scope.items=data;
+      })
+      .error(function(errormsg){
+        alert(errormsg);
+      });
+    }
+}]);
 
-  }]);
-
-  //Controller formulaire
-  app.controller('formController', ['$scope', function($scope){
-    $scope.pushOptions = function(option){
-      $scope.option.ville = $scope.choixVille;
-      $scope.option.ville = $scope.choixCategorie;
-    };
-  }]);
-
-  // Controller maps
+ // Controller maps
   app.controller('mapsController',['$scope','$http',function($scope,$http){
       // Variables
       $scope.markers = [];
