@@ -20,26 +20,23 @@
       });
     }
 }]);
-
- // Controller maps
-  app.controller('mapsController',['$scope','$http',function($scope,$http){
-      // Variables
-      $scope.markers = [];
-
-
-      function initMap(){
-      // Options de la Google map
-      var mapOptions = {
-          center: {
-              lat:48.85703523304221,
-              lng:2.3490142822265625
-          },
-           zoom:12
-      };
-
-      $scope.map = new google.maps.Map(document.getElementById("map"),mapOptions);
-      }
+    // Controller maps
+     app.controller('mapsController',['$scope','$http',function($scope,$http){
+         // Variables
+         $scope.markers = [];
 
 
-  }]);
+         function initMap(){
+         // Options de la Google map
+         var mapOptions = {
+             center: {
+                 lat:48.85703523304221,
+                 lng:2.3490142822265625
+             },
+              zoom:12
+         };
+
+         $scope.map = new google.maps.Map(document.getElementById("map"),mapOptions);
+         }
+     }]);
 })();

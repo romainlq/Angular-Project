@@ -77,7 +77,6 @@
               </select>
               <label>Qu'est-ce que tu cherches ?</label>
             </div>
-            <div>searchForm is {{searchForm.$valid}}</div>
             <div class="row container center col s6 offset-s3">
                 <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action" ng-click="getInfos()">C'est parti !
                 <i class="material-icons right">thumb_up</i>
@@ -108,7 +107,7 @@
     <div class="section white">
       <div class="row container">
         <h2 class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
-          <table>
+          <table class="centered">
             <thead>
               <tr>
                   <th data-field="id">Catégorie</th>
@@ -117,14 +116,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td ng-repeat='categ in items track by $index'>{{items.category}}</td>
-              </tr>
-              <tr>
-                <td ng-repeat='name in items track by $index'>{{items.name}}</td>
-              </tr>
-              <tr>
-                <td ng-repeat='address in items track by $index'>{{items.address}}</td>
+              <tr ng-repeat="place in items">
+                <td>{{place.category}}</td>
+                <td>{{place.name}}</td>
+                <td>{{place.address}}</td>
               </tr>
             </tbody>
           </table>
