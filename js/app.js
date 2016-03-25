@@ -2,44 +2,41 @@
   // Création module angular
   var app = angular.module('interest', []);
 
-  // Controllers
-  // Controller général
+  // CONTROLLERS
+
+  // MAIN CONTROLLER
   app.controller('mainController',['$scope','$http', function($scope,$http){
-    /*
-    $scope.ville=null;
-    //  $scope.option;
-    $scope.option=null;
-    this.options=option;
-    */
-    $scope.loading=false; // Charge les données ou non
+    //Variable qui récupère le json des infos demandées par le user
+    $scope.items=null
 
-    recherche="null"; //choix hébergement, activité, poi, etc ...
-    
+    //Fonction qui récupère les infos par categorie et ville choisies
+    $scope.getInfos = function(){
+      $http.get("http://tour-pedia.org/api/getPlaces?location="+$scope.choixVille+"&category="+$scope.choixCategorie)
+      .success(function(data){
+        $scope.items=data;
+      })
+      .error(function(errormsg){
+        alert(errormsg);
+      });
+    }
+}]);
+    // Controller maps
+     app.controller('mapsController',['$scope','$http',function($scope,$http){
+         // Variables
+         $scope.markers = [];
 
-  }]);
 
-  //Controller formulaire
-  app.controller('formController', ['$scope', function($scope){
-    $scope.pushOptions = function(option){
-      $scope.option.ville = $scope.choixVille;
-      $scope.option.categorie = $scope.choixCategorie;
-    };
-  }]);
+         function initMap(){
+         // Options de la Google map
+         var mapOptions = {
+             center: {
+                 lat:48.85703523304221,
+                 lng:2.3490142822265625
+             },
+              zoom:12
+         };
 
-  // Controller maps
-  app.controller('mapsController',['$scope', function($scope){
-      // Variables
-      $scope.markers = [];
-      
-      $scope.updateMap = function (vlat, vlng){
-          map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: vlat, lng: vlng},
-          zoom: 12,
-          mapTypeId: google.maps.MapTypeId.ROADMAP, 
-          scrollwheel: false
-        });
-          
-      }     
-  }]);
-  
+         $scope.map = new google.maps.Map(document.getElementById("map"),mapOptions);
+         }
+     }]);
 })();
