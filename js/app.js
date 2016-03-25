@@ -30,17 +30,16 @@
   app.controller('mapsController',['$scope', function($scope){
       // Variables
       $scope.markers = [];
-
-      // Options de la Google map
-      var mapOptions = {
-           center: new google.maps.LatLng(48.85703523304221, 2.3490142822265625),
-           zoom:12,
-           scrollwheel:false,
-      }
-      console.log("Affichage de la map...");
-      $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-      console.log("Map affichée...");
       
+      $scope.updateMap = function (vlat, vlng){
+          map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: vlat, lng: vlng},
+          zoom: 12,
+          mapTypeId: google.maps.MapTypeId.ROADMAP, 
+          scrollwheel: false
+        });
+          
+      }     
   }]);
   
 })();

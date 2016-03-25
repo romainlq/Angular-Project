@@ -6,7 +6,8 @@ html, body {
 
 #map {
     height: 450px;
-    width: 450px;
+    max-width: 650px;
+    width: 100%;
 }
 #index-banner{
   position: relative;
