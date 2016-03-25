@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
-  <body ng-controller="mainController">
+  <body ng-controller="mainController as mainCtrl">
     <div id="top" class="navbar-fixed">
       <nav>
         <div class="nav-wrapper container">
@@ -51,9 +51,9 @@
         <h2 class="header">Fais ton choix de ville tralala</h2>
         <br><br>
         <div class="row-container">
-          <form id="formulaire" name="searchForm" ng-controller="formController as formCtrl" ng-submit="formCtrl.pushOptions(options)">
+          <form id="formulaire" name="searchForm">
             <div class="input-field col s12">
-              <select name="choixVille" ng-model="data.choixVille" id="choixVille" required>
+              <select name="choixVille" ng-model="choixVille" id="choixVille" required>
                 <option value="" disabled selected>Choisis ta ville</option>
                 <option value="Amsterdam">Amsterdam</option>
                 <option value="Barcelona">Barcelone</option>
@@ -68,7 +68,7 @@
             </div>
             <br><br><br>
             <div class="input-field col s12">
-              <select name="choixCategorie" id="choixCategorie" ng-model="data.choixCategorie" required>
+              <select name="choixCategorie" id="choixCategorie" ng-model="choixCategorie" required>
                 <option value="" disabled selected>Dodo ? Pécho ? Graille ? </option>
                 <option value="accomodation">Hébergement</option>
                 <option value="attraction">Où sortir</option>
@@ -77,9 +77,8 @@
               </select>
               <label>Qu'est-ce que tu cherches ?</label>
             </div>
-            <div>searchForm is {{searchForm.$valid}}</div>
             <div class="row container center col s6 offset-s3">
-                <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action">C'est parti !
+                <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action" ng-click="getInfos()">C'est parti !
                 <i class="material-icons right">thumb_up</i>
             </button>
             </div>
@@ -116,8 +115,23 @@
     <!-- FOOTER -->
     <div class="section white">
       <div class="row container">
-        <h2 class="header">Infos légales</h2>
-        <p class="grey-text text-darken-3 lighten-3">Patati patata</p>
+        <h2 class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
+          <table class="centered">
+            <thead>
+              <tr>
+                  <th data-field="id">Catégorie</th>
+                  <th data-field="name">Nom</th>
+                  <th data-field="price">Adresse</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="place in items">
+                <td>{{place.category}}</td>
+                <td>{{place.name}}</td>
+                <td>{{place.address}}</td>
+              </tr>
+            </tbody>
+          </table>
       </div>
     </div>
 
@@ -139,10 +153,11 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     
     <script type="text/javascript" src="js/materialize.js"></script>
-    <!--Import parallax initialisation-->
+    <!--Import components initialisations-->
     <script type="text/javascript" src="js/parallax.js"></script>
     <!--Import scroll file-->
     <script type="text/javascript" src="js/scroll.js"></script>
+    <!--Import angular files-->
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     
