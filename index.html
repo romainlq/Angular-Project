@@ -12,7 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
-  <body ng-controller="mainController as mainCtrl">
+  <body ng-controller="mainController as mainCtrl"> 
+      <!-- NAVBAR -->
     <div id="top" class="navbar-fixed">
       <nav>
         <div class="nav-wrapper container">
@@ -29,6 +30,8 @@
         </div>
       </nav>
     </div>
+    
+    <!-- SECTION 1 : ACCUEIL -->
     <div class="parallax-container">
     <div class="parallax"><img src="css/images/ville.png">
       <div class="section no-pad-bot" id="index-banner">
@@ -38,20 +41,24 @@
           <div class="row center">
             <h5 class="header col s12 white-text">Le moyen le plus simple de découvrir une ville</h5>
           </div>
-          <div class="center">
-               <a class="waves-effect waves-light btn orange" ><i class="material-icons right">navigation</i>Afficher la map</a> 
-           </div>  
+          <div class="row center">
+            <a id="start-button" href="#" class="btn-large waves-effect waves-light orange">Get Started</a>
+          </div>
           <br><br>
         </div>
     </div>
     </div>
     </div>
+    
+    <!-- SECTION 2 : Choix ville et activité-->
     <div id="ville" class="section white">
       <div class="row container">
         <h2 class="header">Fais ton choix de ville tralala</h2>
         <br><br>
         <div class="row-container">
+            <!-- Formulaire-->
           <form id="formulaire" name="searchForm">
+            <!-- Choix ville parmi une liste -->
             <div class="input-field col s12">
               <select name="choixVille" ng-model="choixVille" id="choixVille" required>
                 <option value="" disabled selected>Choisis ta ville</option>
@@ -67,6 +74,7 @@
               <label>Sélection de la ville</label>
             </div>
             <br><br><br>
+            <!-- Choix activité parmi une liste -->
             <div class="input-field col s12">
               <select name="choixCategorie" id="choixCategorie" ng-model="choixCategorie" required>
                 <option value="" disabled selected>Dodo ? Pécho ? Graille ? </option>
@@ -89,33 +97,55 @@
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background1.jpg"></div>
     </div>
-    
-    <!-- SECTION MAP -->
-    <div id="carte" class="section white container" ng-controller="mapsController">
-      <div class="row ">
+    <div id="carte" class="section white">
+      <div class="row container">
           <h2 class="header center">Map</h2>
            <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel</p>
-           <div class="center">
-               <a class="waves-effect waves-light btn orange" ><i class="material-icons right">navigation</i>Actualiser la map</a> 
-           </div>          
+           
+           
+           <!-- Loading circle si loading = true -->
+           <div ng-show="loading" class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+             <div class="circle-clipper left">
+              <div class="circle"></div>
+             </div>
+             <div class="gap-patch">
+              <div class="circle"></div>
+             </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+               </div>
+              </div>
+            </div>
+
+          <!-- Affichage map sur 50% de la section -->
+          <div class="row col s6">
+              <div id="map"></div>
+          </div>
+
       </div>
-       <!-- Affichage map sur 50% de la section -->
-       <div class="row">
-         <div class="col s12" id="map">
-         </div>  
-       </div>
-              
     </div>
     
-    <!-- SECTION PARALLAX -->
+    
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background2.jpg"></div>
     </div>
-    
-    <!-- FOOTER -->
     <div class="section white">
       <div class="row container">
         <h2 class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
+        <div class="input-field col s9">
+          <input placeholder="Nom ou adresse" ng-model="search" id="search" type="text">
+          <label for="name">Recherche :</label>
+        </div>
+        <div class="input-field col s3">
+            <select ng-model="nbResult">
+                <option value="" disabled selected>Combien de résultats ?</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+            <label>Nombre de résultats :</label>
+         </div>
           <table class="centered">
             <thead>
               <tr>
@@ -125,7 +155,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="place in items">
+              <tr ng-repeat="place in items | filter:search | limitTo:nbResult">
                 <td>{{place.category}}</td>
                 <td>{{place.name}}</td>
                 <td>{{place.address}}</td>
@@ -135,23 +165,9 @@
       </div>
     </div>
 
-    <!--Importation des différents scripts -->
-    <!-- Initialisation de la map en asynchrone -->
     <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 48.85703523304221, lng: 2.3490142822265625},
-          zoom: 12,
-          mapTypeId: google.maps.MapTypeId.ROADMAP, 
-          scrollwheel: false
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIW1SxZ7GCQDf_bEvOsXDLNqgZkwB3tpU&callback=initMap"
-    async defer></script>
+    <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    
     <script type="text/javascript" src="js/materialize.js"></script>
     <!--Import components initialisations-->
     <script type="text/javascript" src="js/parallax.js"></script>
