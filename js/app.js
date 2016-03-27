@@ -7,9 +7,30 @@
   // MAIN CONTROLLER
   app.controller('mainController',['$scope','$http', function($scope,$http){
     //Variable qui récupère le json des infos demandées par le user
-    $scope.items=null
+    $scope.items=null;
+    $scope.cities=null;
+    $scope.lat=null;
+    $scope.lng=null;
     $scope.nbResult = 20;
     $scope.loading=false;
+    
+    //Fonction qui récupère les differentes villes ainsi que latitude/longitude
+    $scope.getCities = function () {
+        $scope.loading=true;
+        console.log("Chargement des villes...");
+        $http.get("json/villes.json")
+            .success(function (data) {
+                $scope.cities = data;
+                $scope.loading = false;
+                console.log("Chargement des villes OK");
+            })
+            
+            .error(function(errormsg){
+                alert(errormsg);
+                $scope.loading = false;
+                console.log("Erreur chargement villes");
+            })
+    }
 
     //Fonction qui récupère les infos par categorie et ville choisies
     $scope.getInfos = function(){
@@ -24,24 +45,24 @@
         $scope.loading=false;
       });
     }
+    
+    // Fonction qui récupère les coordonnées d'une ville en fonction du json villes.json
+    $scope.getLatLng = function(){
+        
+    }
+    
+   $scope.getCities();
 }]);
     // Controller maps
-     app.controller('mapsController',['$scope','$http',function($scope,$http){
+     app.controller('mapsController',['$scope',function($scope){
          // Variables
          $scope.markers = [];
+         
 
+         function updateMap(){
+        var panPoint = new google.maps.LatLng($scope.lat, $scope.lng);
 
-         function initMap(){
-         // Options de la Google map
-         var mapOptions = {
-             center: {
-                 lat:48.85703523304221,
-                 lng:2.3490142822265625
-             },
-              zoom:12
-         };
-
-         $scope.map = new google.maps.Map(document.getElementById("map"),mapOptions);
+        map.panTo(panPoint);
          }
      }]);
 })();

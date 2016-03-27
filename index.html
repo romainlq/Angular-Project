@@ -65,11 +65,9 @@
                 <option value="Amsterdam">Amsterdam</option>
                 <option value="Barcelona">Barcelone</option>
                 <option value="Berlin">Berlin</option>
-                <option value="Dubay">Dubaï</option>
                 <option value="London">Londres</option>
                 <option value="Paris">Paris</option>
                 <option value="Rome">Rome</option>
-                <option value="Tuscany">Toscane</option>
               </select>
               <label>Sélection de la ville</label>
             </div>
@@ -85,6 +83,7 @@
               </select>
               <label>Qu'est-ce que tu cherches ?</label>
             </div>
+            <!-- Affichage du bouton d'envoie lorsque les deux champs sont remplis -->
             <div class="row container center col s6 offset-s3">
                 <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action" ng-click="getInfos()">C'est parti !
                 <i class="material-icons right">thumb_up</i>
@@ -94,16 +93,19 @@
         </div>
       </div>
     </div>
+    
+    <!-- SECTION PARALLAX TRANSITION -->
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background1.jpg"></div>
     </div>
+    
+    <!-- SECTION MAP -->
     <div id="carte" class="section white">
       <div class="row container">
           <h2 class="header center">Map</h2>
            <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel</p>
            
-           
-           <!-- Loading circle si loading = true -->
+           <!-- Affichage du loading Loading circle si loading = true -->
            <div ng-show="loading" class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
              <div class="circle-clipper left">
@@ -119,18 +121,20 @@
             </div>
 
           <!-- Affichage map sur 50% de la section -->
-          <div class="row col s6">
+          <div class="row col s8">
               <div id="map"></div>
           </div>
 
       </div>
     </div>
     
-    
+    <!-- SECTION PARALLAX TRANSITION -->
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background2.jpg"></div>
     </div>
-    <div class="section white">
+    
+    <!-- SECTION AFFICHAGE VALEUR DANS UN TABLEAU -->
+    <div class="section white" ng-show="items">
       <div class="row container">
         <h2 class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
         <div class="input-field col s9">
@@ -142,7 +146,8 @@
                 <option value="" disabled selected>Combien de résultats ?</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
-                <option value="30">30</option>
+                <option value="30">50</option>
+                <option value="100">100</option>
             </select>
             <label>Nombre de résultats :</label>
          </div>
@@ -164,9 +169,23 @@
           </table>
       </div>
     </div>
+    
+     <script type="text/javascript">
+        var map;
+        function initMap(){
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 48.8566140, lng: 2.3522219},
+                zoom:11
+            });
+        }
+    </script>
+    
+    
 
-    <script>
     <!--Import jQuery before materialize.js-->
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIW1SxZ7GCQDf_bEvOsXDLNqgZkwB3tpU&callback=initMap">
+    </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>
     <!--Import components initialisations-->
@@ -176,6 +195,5 @@
     <!--Import angular files-->
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
-    
   </body>
 </html>
