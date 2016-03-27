@@ -13,7 +13,7 @@
     $scope.lng=null;
     $scope.nbResult = 20;
     $scope.loading=false;
-    
+
     //Fonction qui récupère les differentes villes ainsi que latitude/longitude
     $scope.getCities = function () {
         $scope.loading=true;
@@ -24,7 +24,7 @@
                 $scope.loading = false;
                 console.log("Chargement des villes OK");
             })
-            
+
             .error(function(errormsg){
                 alert(errormsg);
                 $scope.loading = false;
@@ -45,24 +45,52 @@
         $scope.loading=false;
       });
     }
-    
+
+
+
     // Fonction qui récupère les coordonnées d'une ville en fonction du json villes.json
     $scope.getLatLng = function(){
-        
+      switch($scope.choixVille) {
+          case'Amsterdam':
+              choixVilleNum = 0;
+              break;
+          case 'Barcelona':
+              choixVilleNum = 1;
+              break;
+          case 'Berlin':
+              choixVilleNum = 2;
+              break;
+          case 'London':
+              choixVilleNum = 3;
+              break;
+          case 'Paris':
+              choixVilleNum = 4;
+              break;
+          case 'Rome':
+              choixVilleNum = 5;
+              break;
+          default:
+              console.log("erreur switch");
+        }
+        $scope.lat = $scope.cities[choixVilleNum].lat;
+        $scope.lng = $scope.cities[choixVilleNum].lng;
     }
-    
-   $scope.getCities();
+
+//On récupère le tableau des villes
+$scope.getCities();
+
 }]);
-    // Controller maps
-     app.controller('mapsController',['$scope',function($scope){
-         // Variables
-         $scope.markers = [];
-         
 
-         function updateMap(){
-        var panPoint = new google.maps.LatLng($scope.lat, $scope.lng);
+  //MAP CONTROLLER
+   app.controller('mapsController',['$scope',function($scope){
+       // Variables
+       $scope.markers = [];
 
-        map.panTo(panPoint);
-         }
-     }]);
+
+       function updateMap(){
+      var panPoint = new google.maps.LatLng($scope.lat, $scope.lng);
+
+      map.panTo(panPoint);
+       }
+   }]);
 })();

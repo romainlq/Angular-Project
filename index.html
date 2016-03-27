@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
-  <body ng-controller="mainController as mainCtrl"> 
+  <body ng-controller="mainController as mainCtrl">
       <!-- NAVBAR -->
     <div id="top" class="navbar-fixed">
       <nav>
@@ -30,7 +30,7 @@
         </div>
       </nav>
     </div>
-    
+
     <!-- SECTION 1 : ACCUEIL -->
     <div class="parallax-container">
     <div class="parallax"><img src="css/images/ville.png">
@@ -49,7 +49,7 @@
     </div>
     </div>
     </div>
-    
+
     <!-- SECTION 2 : Choix ville et activité-->
     <div id="ville" class="section white">
       <div class="row container">
@@ -85,7 +85,7 @@
             </div>
             <!-- Affichage du bouton d'envoie lorsque les deux champs sont remplis -->
             <div class="row container center col s6 offset-s3">
-                <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action" ng-click="getInfos()">C'est parti !
+                <button ng-show=searchForm.$valid id="go"class="btn waves-effect waves-light orange" type="submit" name="action" ng-click="getInfos(); getLatLng()">C'est parti !
                 <i class="material-icons right">thumb_up</i>
             </button>
             </div>
@@ -93,18 +93,19 @@
         </div>
       </div>
     </div>
-    
+
     <!-- SECTION PARALLAX TRANSITION -->
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background1.jpg"></div>
     </div>
-    
+
     <!-- SECTION MAP -->
     <div id="carte" class="section white">
       <div class="row container">
           <h2 class="header center">Map</h2>
            <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel</p>
-           
+           <button class="btn waves-effect waves-light orange" ng-click=""></button>
+
            <!-- Affichage du loading Loading circle si loading = true -->
            <div ng-show="loading" class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
@@ -127,12 +128,12 @@
 
       </div>
     </div>
-    
+
     <!-- SECTION PARALLAX TRANSITION -->
     <div class="parallax-container">
       <div class="parallax"><img src="css/images/background2.jpg"></div>
     </div>
-    
+
     <!-- SECTION AFFICHAGE VALEUR DANS UN TABLEAU -->
     <div class="section white" ng-show="items">
       <div class="row container">
@@ -169,7 +170,7 @@
           </table>
       </div>
     </div>
-    
+
      <script type="text/javascript">
         var map;
         function initMap(){
@@ -179,8 +180,8 @@
             });
         }
     </script>
-    
-    
+
+
 
     <!--Import jQuery before materialize.js-->
     <script async defer
