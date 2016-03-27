@@ -167,31 +167,18 @@
           <h2 class="header center">Map</h2>
           <button ng-click="updateMap()" class="btn waves-effect waves-light orange">Actualiser la carte</button>
            <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel {{$scope.lat}}</p>
-
-
           <!-- Affichage map sur 50% de la section -->
           <div class="row col s8">
               <div id="map"></div>
           </div>
-
       </div>
     </div>
-
-     <script type="text/javascript">
-        var map;
-        function initMap(){
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 48.8566140, lng: 2.3522219},
-                zoom:11
-            });
-        }
-    </script>
 
 
 
     <!--Import jQuery before materialize.js-->
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIW1SxZ7GCQDf_bEvOsXDLNqgZkwB3tpU&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIW1SxZ7GCQDf_bEvOsXDLNqgZkwB3tpU">
     </script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.js"></script>

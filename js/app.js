@@ -115,6 +115,11 @@ $scope.getCities();
        $scope.lat =null;
        $scope.lng=null;
 
+       //Initialisation de la carte
+       $scope.map = new google.maps.Map(document.getElementById('map'), {
+           center: {lat: 48.8566140, lng: 2.3522219},
+           zoom:11
+       });
 
        $scope.updateMap = function(){
          $scope.lat=DataFactory.getMainInfo('lat');
@@ -122,7 +127,7 @@ $scope.getCities();
          console.log('latUpdate : '+$scope.lat);
          console.log('lngUpdate : '+$scope.lng);
          var panPoint = new google.maps.LatLng($scope.lat, $scope.lng);
-         map.panTo(panPoint);
+         $scope.map.panTo(panPoint);
        }
    }]);
 
