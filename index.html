@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
-  <body ng-controller="mainController as mainCtrl">
+  <body>
       <!-- NAVBAR -->
     <div id="top" class="navbar-fixed">
       <nav>
@@ -50,6 +50,7 @@
     </div>
     </div>
 
+    <span ng-controller="FormController as FormCtrl">
     <!-- SECTION 2 : Choix ville et activité-->
     <div id="ville" class="section white">
       <div class="row container">
@@ -99,45 +100,26 @@
       <div class="parallax"><img src="css/images/background1.jpg"></div>
     </div>
 
-    <!-- SECTION MAP -->
-    <div id="carte" class="section white">
-      <div class="row container">
-          <h2 class="header center">Map</h2>
-           <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel</p>
-           <button class="btn waves-effect waves-light orange" ng-click=""></button>
-
-           <!-- Affichage du loading Loading circle si loading = true -->
-           <div ng-show="loading" class="preloader-wrapper big active">
-            <div class="spinner-layer spinner-blue-only">
-             <div class="circle-clipper left">
-              <div class="circle"></div>
-             </div>
-             <div class="gap-patch">
-              <div class="circle"></div>
-             </div>
-              <div class="circle-clipper right">
-                <div class="circle"></div>
-               </div>
-              </div>
-            </div>
-
-          <!-- Affichage map sur 50% de la section -->
-          <div class="row col s8">
-              <div id="map"></div>
-          </div>
-
-      </div>
-    </div>
-
-    <!-- SECTION PARALLAX TRANSITION -->
-    <div class="parallax-container">
-      <div class="parallax"><img src="css/images/background2.jpg"></div>
-    </div>
-
     <!-- SECTION AFFICHAGE VALEUR DANS UN TABLEAU -->
-    <div class="section white" ng-show="items">
+    <!-- Il y avait ça dedans avant  -->
+    <div class="section white">
       <div class="row container">
-        <h2 class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
+        <h2 id="tableauDonnees" class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
+        <!-- Affichage du loading Loading circle si loading = true -->
+        <div ng-show="loading" class="preloader-wrapper big active">
+         <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+           <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+           <div class="circle"></div>
+          </div>
+           <div class="circle-clipper right">
+             <div class="circle"></div>
+            </div>
+           </div>
+         </div>
+        <span ng-show="items">
         <div class="input-field col s9">
           <input placeholder="Nom ou adresse" ng-model="search" id="search" type="text">
           <label for="name">Recherche :</label>
@@ -168,6 +150,30 @@
               </tr>
             </tbody>
           </table>
+        </span> <!-- Fin ng-show -->
+      </div>
+    </div>
+</span> <!-- Fin FormCtrl -->
+
+
+    <!-- SECTION PARALLAX TRANSITION -->
+    <div class="parallax-container">
+      <div class="parallax"><img src="css/images/background2.jpg"></div>
+    </div>
+
+    <!-- SECTION MAP -->
+    <div id="carte" class="section white" ng-controller="mapController as MapCtrl">
+      <div class="row container">
+          <h2 class="header center">Map</h2>
+          <button ng-click="updateMap()" class="btn waves-effect waves-light orange">Actualiser la carte</button>
+           <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel {{$scope.lat}}</p>
+
+
+          <!-- Affichage map sur 50% de la section -->
+          <div class="row col s8">
+              <div id="map"></div>
+          </div>
+
       </div>
     </div>
 
