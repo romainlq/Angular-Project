@@ -6,7 +6,8 @@
   app.factory('DataFactory', function(){
     var mainInfos =[
       lat=48.8566140,
-      lng=2.3522219
+      lng=2.3522219,
+      items=[]
     ];
 
     return {
@@ -44,8 +45,7 @@
                 console.log("Chargement des villes OK");
             })
 
-            .error(function(errormsg){
-                alert(errormsg);
+            .error(function(){
                 $scope.loading = false;
                 console.log("Erreur chargement villes");
             })
@@ -57,9 +57,11 @@
       $http.get("http://tour-pedia.org/api/getPlaces?location="+$scope.choixVille+"&category="+$scope.choixCategorie)
       .success(function(data){
         $scope.items=data;
+        DataFactory.setMainInfo('items',$scope.items);
+        console.log("Données bien récupérées !");
         $scope.loading=false;
       })
-      .error(function(errormsg){
+      .error(function(){
         console.log("Tu ne charges pas du tout, Cannabis !");
         $scope.loading=false;
       });
@@ -93,14 +95,10 @@
         }
         $scope.lat = $scope.cities[choixVilleNum].lat;
         $scope.lng = $scope.cities[choixVilleNum].lng;
-        console.log('lat : '+$scope.lat);
-        console.log('lng : '+$scope.lng);
         DataFactory.setMainInfo('lat',$scope.lat);
         DataFactory.setMainInfo('lng',$scope.lng);
         $scope.latfac = DataFactory.getMainInfo('lat');
         $scope.lngfac = DataFactory.getMainInfo('lng');
-        console.log('latFactory : '+$scope.latfac);
-        console.log('lngFactory : '+$scope.lngfac);
     }
 
 //On récupère le tableau des villes
@@ -114,21 +112,87 @@ $scope.getCities();
        $scope.markers = [];
        $scope.lat =null;
        $scope.lng=null;
+       $scope.items=DataFactory.getMainInfo('items');
+
+       var infoWindow = new google.maps.InfoWindow({
+      		maxWidth: 200
+       });
+
+       var markerClusterOptions = {
+          gridSize: 60,
+          maxZoom: 15,
+          minimumClusterSize: 4
+        };
+
 
        //Initialisation de la carte
        $scope.map = new google.maps.Map(document.getElementById('map'), {
            center: {lat: 48.8566140, lng: 2.3522219},
-           zoom:11
+           zoom:12
        });
 
        $scope.updateMap = function(){
+         // Update map
          $scope.lat=DataFactory.getMainInfo('lat');
          $scope.lng=DataFactory.getMainInfo('lng');
-         console.log('latUpdate : '+$scope.lat);
-         console.log('lngUpdate : '+$scope.lng);
+         a = DataFactory.getMainInfo('items');
+
          var panPoint = new google.maps.LatLng($scope.lat, $scope.lng);
          $scope.map.panTo(panPoint);
+
+         // Affichage des markers sur la map
+         for (i = 0; i < a.length; i++){
+            createMarker(a[i], $scope.map);
+          }
+
+          var markerCluster = new MarkerClusterer($scope.map, $scope.markers, markerClusterOptions);
+
        }
+
+       function createMarker (item, map){
+         polarity = item.polarity;
+         if (polarity<=3){
+           color = 'E74C3C';
+         } else if (polarity <=6){
+           color = 'F1C40F';
+         } else if(polarity <=10){
+           color = '2ECC71';
+         } else {
+           color = '95A5A6';
+         }
+
+         var marker = new google.maps.Marker({
+           position: new google.maps.LatLng(item.lat, item.lng),
+           map: map,
+           title: item.name,
+           	icon: 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|'+color+'|000000',
+         });
+
+         marker.content = '<div>'+ item.name +'</br>' + item.address + '</br>' + 'Polarity : ' + item.polarity +'/10'+ '</div>';
+         google.maps.event.addListener(marker, 'click', function(){
+        		infoWindow.setContent(marker.content);
+        		infoWindow.open(map, marker);
+        	});
+        $scope.markers.push(marker);
+
+
+
+
+       }
+
    }]);
 
+   //FILTRE
+      app.filter('formatTexte', function() {
+       return function(x) {
+           var i, c, txt = "";
+           x = x.split("")
+           txt = x[0].toUpperCase();
+           for (i = 1; i < x.length; i++) {
+               c = x[i];
+               txt += c;
+             }
+           return txt;
+         };
+       });
 })();
