@@ -41,9 +41,6 @@
           <div class="row center">
             <h5 class="header col s12 white-text">Le moyen le plus simple de découvrir une ville</h5>
           </div>
-          <div class="row center">
-            <a id="start-button" href="#" class="btn-large waves-effect waves-light orange">Get Started</a>
-          </div>
           <br><br>
         </div>
     </div>
@@ -54,7 +51,7 @@
     <!-- SECTION 2 : Choix ville et activité-->
     <div id="ville" class="section white">
       <div class="row container">
-        <h2 class="header">Fais ton choix de ville tralala</h2>
+        <h2 class="header">Que peut-on faire pour vous ?</h2>
         <br><br>
         <div class="row-container">
             <!-- Formulaire-->
@@ -76,7 +73,7 @@
             <!-- Choix activité parmi une liste -->
             <div class="input-field col s12">
               <select name="choixCategorie" id="choixCategorie" ng-model="choixCategorie" required>
-                <option value="" disabled selected>Dodo ? Pécho ? Graille ? </option>
+                <option value="" disabled selected>Type d'activité</option>
                 <option value="attraction">Où sortir</option>
                 <option value="restaurant">Restaurants</option>
                 <option value="poi">Lieux à visiter</option>
@@ -103,21 +100,23 @@
     <!-- Il y avait ça dedans avant  -->
     <div class="section white">
       <div class="row container">
-        <h2 id="tableauDonnees" class="header">Qu'est-ce-que-c'est qu'on peut faire ici Jacqueline ?</h2>
+        <h2 id="tableauDonnees" class="header">Votre recherche</h2>
         <!-- Affichage du loading Loading circle si loading = true -->
-        <div ng-show="loading" class="preloader-wrapper big active center">
-         <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-           <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-           <div class="circle"></div>
-          </div>
-           <div class="circle-clipper right">
+        <div class="row center">
+          <div ng-show="loading" class="preloader-wrapper big active center">
+           <div class="spinner-layer spinner-blue-only">
+            <div class="circle-clipper left">
              <div class="circle"></div>
             </div>
+            <div class="gap-patch">
+             <div class="circle"></div>
+            </div>
+             <div class="circle-clipper right">
+               <div class="circle"></div>
+              </div>
+             </div>
            </div>
-         </div>
+        </div>
         <span ng-show="items">
         <div class="input-field col s9">
           <input placeholder="Nom ou adresse" ng-model="search" id="search" type="text">
@@ -163,9 +162,10 @@
     <!-- SECTION MAP -->
     <div id="carte" class="section white" ng-controller="mapController as MapCtrl">
       <div class="row container">
-          <h2 class="header center">Map</h2>
-          <button ng-click="updateMap()" class="btn waves-effect waves-light orange">Actualiser la carte</button>
-           <p class="grey-text text-darken-3 lighten-3 center">Ici on affiche la carte, les infos, tout le bordel {{$scope.lat}}</p>
+          <h2 class="header center">Ne cherchez plus, c'est ici</h2>
+          <div class="row center">
+            <button ng-click="updateMap()" class="btn waves-effect waves-light orange">Actualiser la carte</button>
+          </div>
           <!-- Affichage map sur 50% de la section -->
           <div class="row col s8">
               <div id="map"></div>
